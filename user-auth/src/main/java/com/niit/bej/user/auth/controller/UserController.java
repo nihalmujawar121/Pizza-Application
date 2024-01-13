@@ -1,6 +1,8 @@
 package com.niit.bej.user.auth.controller;
 
+import com.niit.bej.user.auth.exception.InvalidCredentialsException;
 import com.niit.bej.user.auth.exception.UserAlreadyRegisteredException;
+import com.niit.bej.user.auth.exception.UserNotFoundException;
 import com.niit.bej.user.auth.model.User;
 import com.niit.bej.user.auth.service.UserService;
 import com.niit.bej.user.auth.service.security.SecurityTokenGenerator;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/home")
@@ -29,5 +33,12 @@ public class UserController {
     public ResponseEntity<User> registerUser(@RequestBody User user) throws UserAlreadyRegisteredException {
         User registerUser = userService.register(user);
         return new ResponseEntity<>(registerUser, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, String>> loginUser(@RequestBody User user) throws UserNotFoundException, InvalidCredentialsException {
+        User loggedInUser = userService.login(user);
+        Map<String, String> token = securityTokenGenerator.generateToken(loggedInUser);
+        return new ResponseEntity<>(token, HttpStatus.OK);
     }
 }
