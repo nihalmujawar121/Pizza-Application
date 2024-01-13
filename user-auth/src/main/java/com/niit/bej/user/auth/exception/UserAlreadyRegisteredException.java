@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(reason = "Customer already registered !", code = HttpStatus.CONFLICT)
-public class CustomerAlreadyRegisteredException extends Exception {
-    public CustomerAlreadyRegisteredException(String message) {
+public class UserAlreadyRegisteredException extends Exception {
+    public UserAlreadyRegisteredException(String message) {
         super(message);
     }
 }

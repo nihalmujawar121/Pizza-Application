@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @Entity
 public class User {
     @Id
-    private int customerId;
-    private String customerName;
+    private int userId;
+    private String userName;
     private String password;
     private String mobileNumber;
     private String address;
