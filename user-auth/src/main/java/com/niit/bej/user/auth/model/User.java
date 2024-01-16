@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class User {
     @Id
-    private int userEmailId;
+    private String userEmailId;
     private String userName;
     private String password;
     private String mobileNumber;
