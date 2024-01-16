@@ -17,7 +17,6 @@ public class SecurityTokenGeneratorImpl implements SecurityTokenGenerator {
         claims.put("userName", user.getUserName());
         String token = Jwts.builder()
                 .setIssuedAt(new Date())
-                .setIssuer("UserAuth")
                 .setClaims(claims)
                 .setSubject(user.getUserName())
                 .signWith(SignatureAlgorithm.HS256, "password")
