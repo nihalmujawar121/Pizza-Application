@@ -2,11 +2,19 @@ package com.niit.bej.pizza.order.service;
 
 import com.niit.bej.pizza.order.model.PizzaOrder;
 import com.niit.bej.pizza.order.model.User;
+import com.niit.bej.pizza.order.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
+    private final UserRepository userRepository;
+
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public User registerUser(User user) {
