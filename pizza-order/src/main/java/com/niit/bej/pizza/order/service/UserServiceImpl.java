@@ -6,6 +6,8 @@ import com.niit.bej.pizza.order.model.User;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
+
+
     @Override
     public User registerUser(User user) {
         return null;
