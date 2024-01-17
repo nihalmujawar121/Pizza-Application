@@ -16,7 +16,7 @@ public class User {
     List<PizzaOrder> cart;
     @MongoId
     private String userEmailId;
-    private String userName;
+    private String username;
     private String password;
     private String mobileNumber;
     private String address;
