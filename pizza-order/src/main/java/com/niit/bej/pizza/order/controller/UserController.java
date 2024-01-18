@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/v2")
+@RequestMapping("api/v2/pizza")
 public class UserController {
 
     @Autowired
     UserService userService;
 
-    @PostMapping("/saveDetails")
+    @PostMapping("/saveUser")
     public ResponseEntity<?> saveUser(@RequestBody User user) throws UserAlreadyCreatedException {
         User details = userService.createUser(user);
         if (details != null) {
