@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface UserProxy {
 
     @PostMapping("api/v1/register")
-    ResponseEntity<User> registerUser(@RequestBody UserDTO user);
+    ResponseEntity<User> createUser(@RequestBody UserDTO user);
 }
