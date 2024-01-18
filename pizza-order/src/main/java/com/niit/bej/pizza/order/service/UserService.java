@@ -1,12 +1,13 @@
 package com.niit.bej.pizza.order.service;
 
+import com.niit.bej.pizza.order.exception.UserAlreadyCreatedException;
 import com.niit.bej.pizza.order.model.PizzaOrder;
 import com.niit.bej.pizza.order.model.User;
 
 import java.util.List;
 
 public interface UserService {
-    User registerUser(User user);
+    User createUser(User user) throws UserAlreadyCreatedException;
 
     User findUserByUsername(String username);
 

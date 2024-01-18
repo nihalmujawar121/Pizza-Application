@@ -1,11 +1,15 @@
 package com.niit.bej.pizza.order.service;
 
 import com.niit.bej.pizza.order.UserProxy.UserProxy;
+import com.niit.bej.pizza.order.exception.UserAlreadyCreatedException;
 import com.niit.bej.pizza.order.model.PizzaOrder;
 import com.niit.bej.pizza.order.model.User;
+import com.niit.bej.pizza.order.model.UserDTO;
 import com.niit.bej.pizza.order.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
@@ -21,8 +25,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User registerUser(User user) {
-        return null;
+    public User createUser(User user) throws UserAlreadyCreatedException {
+        List<PizzaOrder> order = new ArrayList<>();
+        user.setCart(order);
+        ResponseEntity details = userProxy.createUser(new UserDTO(user.getUserEmailId(), user.getUsername(), user.getPassword(), user.getMobileNumber(), user.getAddress()));
+        System.out.println(details.getBody());
+        return userRepository.save(user);
+
     }
 
     @Override
