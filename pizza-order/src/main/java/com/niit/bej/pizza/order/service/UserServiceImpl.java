@@ -1,5 +1,6 @@
 package com.niit.bej.pizza.order.service;
 
+import com.niit.bej.pizza.order.UserProxy.UserProxy;
 import com.niit.bej.pizza.order.model.PizzaOrder;
 import com.niit.bej.pizza.order.model.User;
 import com.niit.bej.pizza.order.repository.UserRepository;
@@ -10,6 +11,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+
+    @Autowired
+    UserProxy userProxy;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
