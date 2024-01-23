@@ -7,7 +7,6 @@
         <groupId>com.niit.bej</groupId>
         <artifactId>Pizza_App</artifactId>
         <version>1.0.0</version>
-        <relativePath/>
     </parent>
 
     <artifactId>user-auth</artifactId>

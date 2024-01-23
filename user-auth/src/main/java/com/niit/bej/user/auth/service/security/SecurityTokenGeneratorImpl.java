@@ -14,17 +14,9 @@ public class SecurityTokenGeneratorImpl implements SecurityTokenGenerator {
     @Override
     public Map<String, String> generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("userName", user.getUserName());
-        String token = Jwts.builder()
-                .setIssuedAt(new Date())
-                .setClaims(claims)
-                .setSubject(user.getUserName())
-                .signWith(SignatureAlgorithm.HS256, "password")
-                .compact();
-        return Map.of(
-                "token", token,
-                "message", "Login Successfully"
-        );
+        claims.put("username", user.getUsername());
+        String token = Jwts.builder().setIssuedAt(new Date()).setClaims(claims).setSubject(user.getUsername()).signWith(SignatureAlgorithm.HS256, "password").compact();
+        return Map.of("token", token, "message", "Login Successfully");
     }
 }
 
