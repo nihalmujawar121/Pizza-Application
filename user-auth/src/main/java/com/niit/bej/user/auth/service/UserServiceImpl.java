@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User register(User user) throws UserAlreadyRegisteredException {
-        Optional<User> optionalUser = this.userRepository.findById(user.getUserEmailId());
+        Optional<User> optionalUser = this.userRepository.findById(user.getUsername());
         if (optionalUser.isPresent()) {
             throw new UserAlreadyRegisteredException("Customer name is taken, please choose another customer name");
         }
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(User user) throws UserNotFoundException, InvalidCredentialsException {
-        Optional<User> optionalUser = this.userRepository.findById(user.getUserEmailId());
+        Optional<User> optionalUser = this.userRepository.findById(user.getUsername());
         if (optionalUser.isEmpty()) {
             throw new UserNotFoundException("User not found !");
         }
