@@ -1,8 +1,9 @@
 package com.niit.bej.pizza.service;
 
+import com.niit.bej.pizza.exception.UserAlreadyCreatedException;
 import com.niit.bej.pizza.model.User;
 
 public interface UserService {
-    User createUser(User user);
+    User createUser(User user) throws UserAlreadyCreatedException;
 
 }
