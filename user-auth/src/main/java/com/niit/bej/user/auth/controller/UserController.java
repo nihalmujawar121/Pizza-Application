@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> loginUser(@RequestBody User user) throws UserNotFoundException, InvalidCredentialsException {
+    public ResponseEntity<?> loginUser(@RequestBody User user) throws UserNotFoundException, InvalidCredentialsException {
         User loggedInUser = userService.login(user);
         Map<String, String> token = securityTokenGenerator.generateToken(loggedInUser);
         return new ResponseEntity<>(token, HttpStatus.OK);

@@ -15,8 +15,9 @@ public class SecurityTokenGeneratorImpl implements SecurityTokenGenerator {
     public Map<String, String> generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("username", user.getUsername());
-        String token = Jwts.builder().setIssuedAt(new Date()).setClaims(claims).setSubject(user.getUsername()).signWith(SignatureAlgorithm.HS256, "password").compact();
-        return Map.of("token", token, "message", "Login Successfully");
+        String token = Jwts.builder().setClaims(claims).setIssuedAt(new Date()).signWith(SignatureAlgorithm.HS512, "password").compact();
+        return Map.of("token", token,
+                user.getUsername(), "Login Successfully");
     }
 }
 

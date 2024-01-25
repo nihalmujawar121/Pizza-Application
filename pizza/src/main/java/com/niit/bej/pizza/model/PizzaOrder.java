@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PizzaOrder {
-    @MongoId
+
     private int pizzaId;
     private String varietyOfPizza;
     private int priceOfPizza;
