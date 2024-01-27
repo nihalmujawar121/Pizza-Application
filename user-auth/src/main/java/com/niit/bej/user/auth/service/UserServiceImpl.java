@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
             throw new UserNotFoundException("User not found !");
         }
         User newUser = optionalUser.get();
-        if (user.getUserEmailId().equals(newUser.getUserEmailId()) ) {
+        if (user.getUserEmailId().equals(newUser.getUserEmailId()) && user.getPassword().equals(newUser.getPassword())) {
             return newUser;
         }
         throw new InvalidCredentialsException("Please check your username and password!");

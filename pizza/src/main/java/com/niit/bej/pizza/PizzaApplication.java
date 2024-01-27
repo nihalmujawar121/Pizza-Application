@@ -19,7 +19,7 @@ public class PizzaApplication {
     public FilterRegistrationBean filterBean(){
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(new JwtFilter());
-        filterRegistrationBean.addUrlPatterns("/api/v2/pizza/cart/add");
+        filterRegistrationBean.addUrlPatterns("/api/v2/pizza/addPizza","/api/v2/pizza/deleteOrder/**");
         return filterRegistrationBean;
     }
 
