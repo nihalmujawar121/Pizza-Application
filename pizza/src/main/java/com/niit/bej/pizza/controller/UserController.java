@@ -8,10 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v2/pizza")
@@ -30,7 +27,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/cart/add")
+    @PostMapping("/addPizza")
     public ResponseEntity<?> addPizza(HttpServletRequest httpServletRequest, @RequestBody PizzaOrder pizzaOrder) {
         String email = (String) httpServletRequest.getAttribute("userEmailId");
         System.out.println(email);
@@ -38,6 +35,17 @@ public class UserController {
             return new ResponseEntity<>(userService.addPizza(email, pizzaOrder), HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Error Occurred", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/deleteOrder/{pizza}")
+    public ResponseEntity<?> deletePizzaOrder(HttpServletRequest httpServletRequest, @PathVariable String pizza){
+        String email = (String) httpServletRequest.getAttribute("userEmailId");
+        if(email.isEmpty()){
+            return new ResponseEntity<>(userService.deleteOrder(email,pizza),HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>("Error occurred",HttpStatus.NOT_FOUND);
         }
     }
 
