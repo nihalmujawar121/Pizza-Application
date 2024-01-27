@@ -22,9 +22,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User register(User user) throws UserAlreadyRegisteredException {
-        Optional<User> optionalUser = this.userRepository.findById(user.getUsername());
+        Optional<User> optionalUser = this.userRepository.findById(user.getUserEmailId());
         if (optionalUser.isPresent()) {
-            throw new UserAlreadyRegisteredException("User name is taken, please choose another user name");
+            throw new UserAlreadyRegisteredException("User email is taken, please choose another Email ID");
         }
         return userRepository.save(user);
     }

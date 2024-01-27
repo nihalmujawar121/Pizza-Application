@@ -13,11 +13,18 @@ import java.util.Map;
 public class SecurityTokenGeneratorImpl implements SecurityTokenGenerator {
     @Override
     public Map<String, String> generateToken(User user) {
+        Map<String,String> tokenMap=new HashMap<>();
         Map<String, Object> claims = new HashMap<>();
-        claims.put("username", user.getUsername());
-        String token = Jwts.builder().setClaims(claims).setIssuedAt(new Date()).signWith(SignatureAlgorithm.HS512, "password").compact();
-        return Map.of("token", token,
-                user.getUsername(), "Login Successfully");
+        claims.put("userEmailId", user.getUserEmailId());
+        String token = Jwts
+                .builder()
+                .setClaims(claims)
+                .setIssuedAt(new Date())
+                .signWith(SignatureAlgorithm.HS512, "password")
+                .compact();
+        tokenMap.put("token",token);
+        tokenMap.put("message","Login successfully");
+        return tokenMap;
     }
 }
 
