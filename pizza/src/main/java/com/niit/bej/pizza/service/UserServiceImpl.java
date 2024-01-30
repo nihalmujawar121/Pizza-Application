@@ -48,12 +48,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public User deleteOrder(String userEmailId, String pizzaName) {
         User details = userRepository.findById(userEmailId).get();
-        System.out.println("I am in deleteOrder");
         List<PizzaOrder> cart = details.getCart();
         PizzaOrder removePizza = cart.stream().filter(pizza -> pizza.getVarietyOfPizza().equals(pizzaName)).toList().get(0);
         cart.remove(removePizza);
         details.setCart(cart);
         return userRepository.save(details);
+    }
+
+    @Override
+    public List<PizzaOrder> viewCatalogue() {
+        return null;
+    }
+
+    @Override
+    public List<PizzaOrder> getCart(String emailId) {
+        return null;
     }
 
 

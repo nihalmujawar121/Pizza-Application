@@ -38,11 +38,12 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/deleteOrder/{pizza}")
-    public ResponseEntity<?> deletePizzaOrder(HttpServletRequest httpServletRequest, @PathVariable String pizza){
+    @DeleteMapping("/deleteOrder/{pizzaName}")
+    public ResponseEntity<?> deletePizzaOrder(HttpServletRequest httpServletRequest, @PathVariable String pizzaName){
         String email = (String) httpServletRequest.getAttribute("userEmailId");
-        if(email.isEmpty()){
-            return new ResponseEntity<>(userService.deleteOrder(email,pizza),HttpStatus.OK);
+        System.out.println(email);
+        if(email != null){
+            return new ResponseEntity<>(userService.deleteOrder(email,pizzaName),HttpStatus.OK);
         }
         else {
             return new ResponseEntity<>("Error occurred",HttpStatus.NOT_FOUND);
