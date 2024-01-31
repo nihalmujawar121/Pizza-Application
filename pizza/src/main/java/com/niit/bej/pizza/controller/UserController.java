@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v2/pizza")
 public class UserController {
@@ -39,15 +41,25 @@ public class UserController {
     }
 
     @DeleteMapping("/deleteOrder/{pizzaName}")
-    public ResponseEntity<?> deletePizzaOrder(HttpServletRequest httpServletRequest, @PathVariable String pizzaName){
+    public ResponseEntity<?> deletePizzaOrder(HttpServletRequest httpServletRequest, @PathVariable String pizzaName) {
         String email = (String) httpServletRequest.getAttribute("userEmailId");
         System.out.println(email);
-        if(email != null){
-            return new ResponseEntity<>(userService.deleteOrder(email,pizzaName),HttpStatus.OK);
-        }
-        else {
-            return new ResponseEntity<>("Error occurred",HttpStatus.NOT_FOUND);
+        if (email != null) {
+            return new ResponseEntity<>(userService.deleteOrder(email, pizzaName), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Error occurred", HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/viewCatalogue")
+    public ResponseEntity<?> showCatalogue() {
+        List<PizzaOrder> pizzaOrderList = userService.viewCatalogue();
+        if (pizzaOrderList != null) {
+            return new ResponseEntity<>(pizzaOrderList, HttpStatus.OK);
+        } else {
+            return null;
+        }
+    }
+
 
 }
