@@ -61,5 +61,15 @@ public class UserController {
         }
     }
 
+    @GetMapping("/showCart")
+    public ResponseEntity<?> showCart(HttpServletRequest httpServletRequest) {
+        String email = (String) httpServletRequest.getAttribute("userEmailId");
+        if (email != null) {
+            return new ResponseEntity<>(userService.getCart(email), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Error Occurred!", HttpStatus.CONFLICT);
+        }
+    }
+
 
 }
