@@ -64,7 +64,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<PizzaOrder> getCart(String emailId) {
-        return null;
+        User user = userRepository.findById(emailId).get();
+        List<PizzaOrder> pizzaOrderList = user.getCart();
+        return pizzaOrderList;
     }
 
 
