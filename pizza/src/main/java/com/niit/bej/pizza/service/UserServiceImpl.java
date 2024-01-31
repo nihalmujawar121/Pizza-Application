@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -57,7 +56,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<PizzaOrder> viewCatalogue() {
-        return null;
+        String admin = "Admin@gmail.com";
+        User user = userRepository.findById(admin).get();
+        List<PizzaOrder> pizzaOrderList = user.getCart();
+        return pizzaOrderList;
     }
 
     @Override
