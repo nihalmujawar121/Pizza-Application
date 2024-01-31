@@ -15,11 +15,12 @@ public class PizzaApplication {
     public static void main(String[] args) {
         SpringApplication.run(PizzaApplication.class, args);
     }
+
     @Bean
-    public FilterRegistrationBean filterBean(){
+    public FilterRegistrationBean filterBean() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(new JwtFilter());
-        filterRegistrationBean.addUrlPatterns("/api/v2/pizza/addPizza","/api/v2/pizza/deleteOrder/*");
+        filterRegistrationBean.addUrlPatterns("/api/v2/pizza/addPizza", "/api/v2/pizza/deleteOrder/*", "/api/v2/pizza/viewCatalogue", "/api/v2/pizza/showCart");
         return filterRegistrationBean;
     }
 
