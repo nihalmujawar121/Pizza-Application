@@ -16,7 +16,7 @@ public class UserAuthRouteConfig {
                 .routes()
                 .route(routePredicate -> routePredicate
                         .path("/home/**")
-                        .uri("http://localhost:8081"))
+                        .uri("lb://UserAuth"))
                 .build();
     }
 }
