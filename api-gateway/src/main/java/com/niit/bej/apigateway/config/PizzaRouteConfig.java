@@ -15,6 +15,6 @@ public class PizzaRouteConfig {
                 .routes()
                 .route(routePredicate -> routePredicate
                         .path("/api/v2/pizza/**")
-                        .uri("lb://PizzaApplication")).build();
+                        .uri("http://localhost:8082")).build();
     }
 }

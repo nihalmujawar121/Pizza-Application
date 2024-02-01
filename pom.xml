@@ -19,6 +19,7 @@
         <module>user-auth</module>
         <module>api-gateway</module>
         <module>pizza</module>
+        <module>eureka-server</module>
     </modules>
 
     <name>Pizza_App</name>
