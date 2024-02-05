@@ -69,6 +69,11 @@ public class UserServiceImpl implements UserService {
         return pizzaOrderList;
     }
 
+    @Override
+    public User updatePizzaOrder(String userEmailId, String varietyOfPizza, PizzaOrder pizzaOrder) {
+        return null;
+    }
+
 
 }
 

@@ -17,4 +17,6 @@ public interface UserService {
 
     List<PizzaOrder> getCart(String emailId);
 
+    User updatePizzaOrder(String userEmailId, String varietyOfPizza, PizzaOrder pizzaOrder);
+
 }
