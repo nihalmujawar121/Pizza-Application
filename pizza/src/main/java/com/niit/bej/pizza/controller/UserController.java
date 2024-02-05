@@ -1,5 +1,7 @@
 package com.niit.bej.pizza.controller;
 
+import com.niit.bej.pizza.exception.EmptyOrderListException;
+import com.niit.bej.pizza.exception.PizzaOrderNotFoundException;
 import com.niit.bej.pizza.exception.UserAlreadyCreatedException;
 import com.niit.bej.pizza.model.PizzaOrder;
 import com.niit.bej.pizza.model.User;
@@ -70,5 +72,16 @@ public class UserController {
             return new ResponseEntity<>("Error Occurred!", HttpStatus.CONFLICT);
         }
     }
+
+    @PutMapping("/{userEmailId}/orderList/{varietyOfPizza}")
+    public ResponseEntity<PizzaOrder> updatePizzaOrderDetails(@PathVariable String userEmailId, @PathVariable String varietyOfPizza, @RequestBody PizzaOrder updatedPizzaOrder) {
+        try {
+            PizzaOrder orders = userService.updatePizzaOrder(userEmailId, varietyOfPizza, updatedPizzaOrder);
+            return new ResponseEntity<>(orders, HttpStatus.OK);
+        } catch (EmptyOrderListException | PizzaOrderNotFoundException exception) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 
 }
