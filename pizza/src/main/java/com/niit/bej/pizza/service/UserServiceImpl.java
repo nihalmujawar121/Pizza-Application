@@ -71,19 +71,25 @@ public class UserServiceImpl implements UserService {
         return pizzaOrderList;
     }
 
-    private PizzaOrder findPizzaOrderByVarietyOfPizza(List<PizzaOrder> orderList, String varietyOfPizza ) throws PizzaOrderNotFoundException {
+    private PizzaOrder findPizzaOrderByVarietyOfPizza(List<PizzaOrder> orderList, String varietyOfPizza) throws PizzaOrderNotFoundException {
         Optional<PizzaOrder> optionalPizza = orderList.stream().filter(pizza -> pizza.getVarietyOfPizza().trim().equals(varietyOfPizza)).findFirst();
         return optionalPizza.orElseThrow(() -> new PizzaOrderNotFoundException("could not find the Order of Pizza \"" + varietyOfPizza + "\"!"));
     }
 
     @Override
-    public User updatePizzaOrder(String userEmailId, String varietyOfPizza, PizzaOrder pizzaOrder) throws EmptyOrderListException {
+    public PizzaOrder updatePizzaOrder(String userEmailId, String varietyOfPizza, PizzaOrder updatedPizzaOrder) throws EmptyOrderListException, PizzaOrderNotFoundException {
         User details = userRepository.findById(userEmailId).get();
         List<PizzaOrder> pizzaOrderList = details.getCart();
-        if (pizzaOrderList.isEmpty()){
+        if (pizzaOrderList.isEmpty()) {
             throw new EmptyOrderListException("Order list is empty!");
         }
-        return null;
+        PizzaOrder orderToUpdate = findPizzaOrderByVarietyOfPizza(pizzaOrderList, varietyOfPizza);
+        orderToUpdate.setPizzaId(updatedPizzaOrder.getPizzaId());
+        orderToUpdate.setVarietyOfPizza(updatedPizzaOrder.getVarietyOfPizza());
+        orderToUpdate.setSizeOfPizza(updatedPizzaOrder.getSizeOfPizza());
+        orderToUpdate.setPriceOfPizza(updatedPizzaOrder.getPriceOfPizza());
+        userRepository.save(details);
+        return orderToUpdate;
     }
 
 
