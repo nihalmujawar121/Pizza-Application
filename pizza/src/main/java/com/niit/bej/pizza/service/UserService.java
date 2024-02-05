@@ -1,5 +1,6 @@
 package com.niit.bej.pizza.service;
 
+import com.niit.bej.pizza.exception.EmptyOrderListException;
 import com.niit.bej.pizza.exception.UserAlreadyCreatedException;
 import com.niit.bej.pizza.model.PizzaOrder;
 import com.niit.bej.pizza.model.User;
@@ -17,6 +18,6 @@ public interface UserService {
 
     List<PizzaOrder> getCart(String emailId);
 
-    User updatePizzaOrder(String userEmailId, String varietyOfPizza, PizzaOrder pizzaOrder);
+    User updatePizzaOrder(String userEmailId, String varietyOfPizza, PizzaOrder pizzaOrder) throws EmptyOrderListException;
 
 }

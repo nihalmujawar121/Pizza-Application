@@ -1,5 +1,7 @@
 package com.niit.bej.pizza.service;
 
+import com.niit.bej.pizza.exception.EmptyOrderListException;
+import com.niit.bej.pizza.exception.PizzaOrderNotFoundException;
 import com.niit.bej.pizza.exception.UserAlreadyCreatedException;
 import com.niit.bej.pizza.model.PizzaOrder;
 import com.niit.bej.pizza.model.User;
@@ -69,8 +71,18 @@ public class UserServiceImpl implements UserService {
         return pizzaOrderList;
     }
 
+    private PizzaOrder findPizzaOrderByVarietyOfPizza(List<PizzaOrder> orderList, String varietyOfPizza ) throws PizzaOrderNotFoundException {
+        Optional<PizzaOrder> optionalPizza = orderList.stream().filter(pizza -> pizza.getVarietyOfPizza().trim().equals(varietyOfPizza)).findFirst();
+        return optionalPizza.orElseThrow(() -> new PizzaOrderNotFoundException("could not find the Order of Pizza \"" + varietyOfPizza + "\"!"));
+    }
+
     @Override
-    public User updatePizzaOrder(String userEmailId, String varietyOfPizza, PizzaOrder pizzaOrder) {
+    public User updatePizzaOrder(String userEmailId, String varietyOfPizza, PizzaOrder pizzaOrder) throws EmptyOrderListException {
+        User details = userRepository.findById(userEmailId).get();
+        List<PizzaOrder> pizzaOrderList = details.getCart();
+        if (pizzaOrderList.isEmpty()){
+            throw new EmptyOrderListException("Order list is empty!");
+        }
         return null;
     }
 
